@@ -1,0 +1,47 @@
+<%- include('partials/header') %>
+    <main class="project-details-container">
+        <h1>
+            <%= project.title %>
+        </h1>
+
+        <div class="project-card-detailed">
+            <p class="description">
+                <%= project.description %>
+            </p>
+
+            <hr />
+
+            <p><strong>Date:</strong>
+                <%= new Date(project.date).toLocaleDateString() %>
+            </p>
+            <p><strong>Location:</strong>
+                <%= project.location %>
+            </p>
+            <p>
+                <strong>Partner Organization:</strong>
+                <a href="/organization/<%= project.organization_id %>">
+                    <%= project.organization_name %>
+                </a>
+            </p>
+
+            <div class="project-tags-container">
+                <strong>Categories:</strong>
+                <% if (categories && categories.length> 0) { %>
+                    <span class="tags-list">
+                        <% categories.forEach(cat=> { %>
+                            <a href="/category/<%= cat.category_id %>" class="badge-tag">
+                                <%= cat.category_name %>
+                            </a>
+                            <% }); %>
+                    </span>
+                    <% } else { %>
+                        <span class="no-tags">Uncategorized</span>
+                        <% } %>
+            </div>
+        </div>
+
+        <p class="back-link">
+            <a href="/projects">&larr; Back to All Upcoming Projects</a>
+        </p>
+    </main>
+    <%- include('partials/footer') %>
