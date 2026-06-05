@@ -113,3 +113,14 @@ INSERT INTO categories (category_name)
 VALUES ('Community Outreach'),
     ('Environmental Sustainability'),
     ('Disaster Relief');
+SELECT column_name
+FROM information_schema.columns
+WHERE table_schema = 'public'
+    AND table_name = 'categories';
+SELECT category_id,
+    category_name
+FROM public.categories
+ORDER BY category_name ASC;
+SELECT p.project_id,
+    p.project_name
+FROM public.projects p...

@@ -11,6 +11,7 @@ import {
 /**
  * Handles rendering the main projects page, now limited to upcoming projects
  */
+
 const showProjectsPage = async (req, res) => {
     try {
         // Fetch only the next 5 upcoming projects

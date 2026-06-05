@@ -115,30 +115,31 @@ const getCategoriesByProjectId = async (projectId) => {
  * @returns {Promise<Array>} List of project objects
  */
 const getProjectsByCategoryId = async (categoryId) => {
-    const query = `
-        SELECT 
-            p.project_id,
-            p.title,
-            p.description,
-            p.date,
-            p.location,
-            p.organization_id,
-            o.name AS organization_name
-        FROM public.projects p
-        INNER JOIN public.organization o ON p.organization_id = o.organization_id
-        INNER JOIN public.project_categories pc ON p.project_id = pc.project_id
-        WHERE pc.category_id = $1
-        ORDER BY p.date ASC;
-    `;
-    const queryParams = [categoryId];
-    const result = await db.query(query, queryParams);
-    return result.rows;
+  const query = `
+    SELECT
+      p.project_id,
+      p.title,
+      p.description,
+      p.location,
+      o.name AS organization_name
+    FROM project p
+    JOIN organization o
+      ON p.organization_id = o.organization_id
+    JOIN project_category pc
+      ON p.project_id = pc.project_id
+    WHERE pc.category_id = $1
+    ORDER BY p.title;
+  `;
+
+  const result = await db.query(query, [categoryId]);
+
+  return result.rows;
 };
 
 
 // Export all model functions (Make sure all names here match the functions above!)
 export { 
-    getAllProjects, 
+    getAllProjects,
     getProjectsByOrganizationId, 
     getUpcomingProjects,
     getProjectDetails,
