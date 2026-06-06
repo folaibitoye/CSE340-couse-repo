@@ -44,7 +44,12 @@ router.get('/project/:id', showProjectDetailsPage);
 
 /**
  * Categories routes
+ * 
+ * 
  */
+router.get('/category', (req, res) => {
+  res.redirect('/categories');
+});
 router.get('/categories', showCategoriesPage);
 router.get('/category/:id', showCategoryDetailsPage);
 
