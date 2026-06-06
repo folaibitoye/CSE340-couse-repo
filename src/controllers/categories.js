@@ -17,26 +17,32 @@ const showCategoriesPage = async (req, res) => {
   });
 };
 
-const showCategoryDetailsPage = async (req, res) => {
-  const categoryId = req.params.id;
+const showCategoryDetailsPage = async (req, res, next) => {
+  try {
+    const categoryId = req.params.id;
 
-  const category =
-    await getCategoryById(categoryId);
+    const category =
+      await getCategoryById(categoryId);
 
-  const projects =
-    await getProjectsByCategoryId(categoryId);
+    if (!category) {
+      return res.status(404).render('404', {
+        title: 'Category Not Found'
+      });
+    }
 
-  if (!category) {
-    return res.status(404).render('404', {
-      title: 'Category Not Found'
+    const projects =
+      await getProjectsByCategoryId(categoryId);
+
+    res.render('category', {
+      title: category.category_name,
+      category,
+      projects
     });
-  }
 
-  res.render('category', {
-    title: category.category_name,
-    category,
-    projects
-  });
+  } catch (error) {
+    console.error('Category Details Error:', error);
+    next(error);
+  }
 };
 
 export {

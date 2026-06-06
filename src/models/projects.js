@@ -122,10 +122,10 @@ const getProjectsByCategoryId = async (categoryId) => {
       p.description,
       p.location,
       o.name AS organization_name
-    FROM project p
-    JOIN organization o
+    FROM public.projects p
+    INNER JOIN public.organization o
       ON p.organization_id = o.organization_id
-    JOIN project_category pc
+    INNER JOIN public.project_categories pc
       ON p.project_id = pc.project_id
     WHERE pc.category_id = $1
     ORDER BY p.title;
