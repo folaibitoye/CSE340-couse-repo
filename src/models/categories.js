@@ -5,7 +5,7 @@ const getAllCategories = async () => {
     SELECT
       category_id,
       category_name
-    FROM category
+    FROM categories
     ORDER BY category_name;
   `;
 
@@ -18,7 +18,7 @@ const getCategoryById = async (categoryId) => {
     SELECT
       category_id,
       category_name
-    FROM category
+    FROM categories
     WHERE category_id = $1;
   `;
 
@@ -34,7 +34,7 @@ const getCategoriesByProjectId = async (projectId) => {
     SELECT
       c.category_id,
       c.category_name
-    FROM category c
+    FROM categories c
     JOIN project_category pc
       ON c.category_id = pc.category_id
     WHERE pc.project_id = $1
@@ -50,4 +50,3 @@ export {
   getCategoryById,
   getCategoriesByProjectId
 };
-
