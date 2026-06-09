@@ -1,0 +1,27 @@
+<%- include('partials/header') %>
+
+    <main>
+        <h1>
+            <%= organizationDetails.name %>
+        </h1>
+
+        <p>
+            <%= organizationDetails.description %>
+        </p>
+
+        <h2>Projects</h2>
+
+        <% if (projects.length> 0) { %>
+            <ul>
+                <% projects.forEach(project=> { %>
+                    <li>
+                        <%= project.title %>
+                    </li>
+                    <% }) %>
+            </ul>
+            <% } else { %>
+                <p>No projects found.</p>
+                <% } %>
+    </main>
+
+    <%- include('partials/footer') %>

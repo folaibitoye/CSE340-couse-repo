@@ -6,7 +6,7 @@ import db from './db.js';
 const getAllProjects = async () => {
     const query = `
         SELECT project_id, title, description, status, start_date, end_date
-        FROM public.project;
+        FROM public.projects;
     `;
     const result = await db.query(query);
     return result.rows;
@@ -18,7 +18,7 @@ const getAllProjects = async () => {
 const getProjectsByOrganizationId = async (organizationId) => {
     const query = `
         SELECT project_id, organization_id, title, description, location, date
-        FROM public.project
+        FROM public.projects
         WHERE organization_id = $1
         ORDER BY date;
     `;
