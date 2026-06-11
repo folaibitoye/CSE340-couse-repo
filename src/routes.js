@@ -5,13 +5,20 @@ import { showHomePage } from './controllers/index.js';
 // Organization controllers
 import {
     showOrganizationsPage,
-    showOrganizationDetailsPage
+    showOrganizationDetailsPage,
+    showNewOrganizationForm,
+    processNewOrganizationForm,
+    processEditOrganizationForm,
+    organizationValidation,
+    showEditOrganizationForm
 } from './controllers/organizations.js';
 
 // Project controllers
 import {
     showProjectsPage,
-    showProjectDetailsPage
+    showProjectDetailsPage,
+    showNewProjectForm,
+    processNewProjectForm
 } from './controllers/projects.js';
 
 // Category controllers
@@ -36,6 +43,15 @@ router.get('/', showHomePage);
 router.get('/organizations', showOrganizationsPage);
 router.get('/organization/:id', showOrganizationDetailsPage);
 
+// Route for new organization page
+router.get('/new-organization', showNewOrganizationForm);
+
+// Route to handle new organization form submission
+router.post('/new-organization', organizationValidation, processNewOrganizationForm);
+
+// Route to display the edit organization form
+router.get('/edit-organization/:id', showEditOrganizationForm);
+router.post('/edit-organization/:id', organizationValidation, processEditOrganizationForm);
 /**
  * Projects routes
  */
@@ -52,6 +68,12 @@ router.get('/category', (req, res) => {
 });
 router.get('/categories', showCategoriesPage);
 router.get('/category/:id', showCategoryDetailsPage);
+
+// Route for new project page
+router.get('/new-project', showNewProjectForm);
+
+// Route to handle new project form submission
+router.post('/new-project', processNewProjectForm);
 
 /**
  * Test error route
