@@ -1,22 +1,38 @@
 <%- include('partials/header') %>
+
     <main>
         <h1>
             <%= title %>
         </h1>
+
         <p>Select a category below to explore focused community service projects:</p>
+
+        <!-- ADD NEW CATEGORY LINK (MUST BE INSIDE MAIN) -->
+        <p>
+            <a href="/categories/new">+ Add New Category</a>
+        </p>
 
         <% if (categories && categories.length> 0) { %>
             <ul class="categories-directory">
+
                 <% categories.forEach(cat=> { %>
                     <li>
                         <a href="/category/<%= cat.category_id %>" class="category-link-card">
                             <%= cat.category_name %>
                         </a>
+
+                        <!-- EDIT LINK -->
+                        <a href="/categories/edit/<%= cat.category_id %>" class="edit-link">
+                            Edit
+                        </a>
                     </li>
                     <% }); %>
+
             </ul>
             <% } else { %>
                 <p>No categories found.</p>
                 <% } %>
+
     </main>
+
     <%- include('partials/footer') %>
