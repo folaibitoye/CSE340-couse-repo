@@ -90,7 +90,13 @@ router.get('/categories/new', showNewCategoryForm);
 // HANDLE FORM SUBMISSION
 router.post('/categories/new', categoryValidation, processNewCategoryForm);
 
+// SHOW EDIT FORM
+router.get('/categories/edit/:id', showEditCategoryForm);
+
+// HANDLE EDIT FORM SUBMISSION
+router.post('/categories/edit/:id', categoryValidation, processEditCategoryForm);
 // Route to handle new project form submission
+
 router.post(
     '/new-project',
     projectValidation,

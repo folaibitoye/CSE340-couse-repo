@@ -90,23 +90,20 @@ const processNewCategoryForm = async (req, res) => {
 };
 
 const showEditCategoryForm = async (req, res) => {
-  const categoryId = req.params.id;
+    const categoryId = req.params.id;
 
-  const result = await require('../models/db.js').default.query(
-    `SELECT * FROM categories WHERE category_id = $1`,
-    [categoryId]
-  );
+    const category = await getCategoryById(categoryId);
 
-  if (result.rows.length === 0) {
-    return res.status(404).render('404', {
-      title: 'Category Not Found'
+    if (!category) {
+        return res.status(404).render('404', {
+            title: 'Category Not Found'
+        });
+    }
+
+    res.render('edit-category', {
+        title: 'Edit Category',
+        category
     });
-  }
-
-  res.render('edit-category', {
-    title: 'Edit Category',
-    category: result.rows[0]
-  });
 };
 
 const processEditCategoryForm = async (req, res) => {
